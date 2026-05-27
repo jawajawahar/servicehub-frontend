@@ -30,7 +30,7 @@ export default function PlatformHealth() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await axios.get("http://localhost:5000/api/health", {
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/health`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -91,6 +91,7 @@ export default function PlatformHealth() {
       });
     });
 
+    // CLEANUP
     return () => {
       if (socket) {
         socket.disconnect();

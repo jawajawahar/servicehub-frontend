@@ -40,7 +40,9 @@ export default function WorkspacePage({
   // =========================================
 
   useEffect(() => {
-    socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
+    socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
+      transports: ["websocket"],
+    });
 
     socket.emit("joinWorkspace", workspace?._id);
 

@@ -12,7 +12,9 @@ export default function AdminLiveFeed() {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
+    socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
+      transports: ["websocket"],
+    });
 
     // JOIN ADMIN ROOM
     socket.emit("joinAdminRoom");

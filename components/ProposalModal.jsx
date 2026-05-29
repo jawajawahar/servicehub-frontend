@@ -24,9 +24,7 @@ export default function ProposalModal({ open, onClose, job }) {
 
   if (!open || !job) return null;
 
-  // ===================================
   // SUBMIT PROPOSAL
-  // ===================================
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,7 +37,6 @@ export default function ProposalModal({ open, onClose, job }) {
 
       await api.post(`/applications/${job._id}`, {
         estimatedPrice: price,
-
         message,
       });
 
@@ -66,8 +63,8 @@ export default function ProposalModal({ open, onClose, job }) {
       fixed
       inset-0
       z-[300]
-      bg-[#020617]/70
-      backdrop-blur-xl
+      bg-black/50
+      backdrop-blur-md
       flex
       items-center
       justify-center
@@ -82,14 +79,15 @@ export default function ProposalModal({ open, onClose, job }) {
         overflow-hidden
         w-full
         max-w-2xl
-        rounded-[36px]
+        rounded-[28px]
         border
-        border-[#E2E8F0]
-        bg-white
-        shadow-[0_30px_90px_rgba(15,23,42,0.20)]
+        border-white/40
+        bg-white/80
+        backdrop-blur-2xl
+        shadow-[0_25px_80px_rgba(15,23,42,0.18)]
         "
       >
-        {/* TOP GLOW */}
+        {/* BACKGROUND GLOW */}
         <div
           className="
           absolute
@@ -104,42 +102,31 @@ export default function ProposalModal({ open, onClose, job }) {
           "
         />
 
-        {/* =================================== */}
         {/* HEADER */}
-        {/* =================================== */}
-
         <div
           className="
           relative
-          px-8
-          py-7
+          px-6
+          pt-6
+          pb-5
           border-b
-          border-[#EEF2F7]
+          border-slate-200/70
+          bg-white/60
+          backdrop-blur-xl
           "
         >
-          <div
-            className="
-            flex
-            items-start
-            justify-between
-            gap-5
-            "
-          >
+          <div className="flex items-start justify-between gap-4">
             {/* LEFT */}
-            <div
-              className="
-              flex
-              items-start
-              gap-4
-              "
-            >
+            <div className="flex items-start gap-4">
               {/* ICON */}
               <div
                 className="
-                w-16
-                h-16
-                rounded-[24px]
-                bg-[#0F172A]
+                w-12
+                h-12
+                rounded-2xl
+                bg-gradient-to-br
+                from-slate-900
+                to-slate-700
                 text-white
                 flex
                 items-center
@@ -148,11 +135,12 @@ export default function ProposalModal({ open, onClose, job }) {
                 shrink-0
                 "
               >
-                <Briefcase size={28} />
+                <Briefcase size={20} />
               </div>
 
               {/* TEXT */}
               <div>
+                {/* BADGE */}
                 <div
                   className="
                   inline-flex
@@ -161,36 +149,37 @@ export default function ProposalModal({ open, onClose, job }) {
                   px-3
                   py-1
                   rounded-full
-                  bg-[#EFF6FF]
+                  bg-blue-50
                   border
-                  border-[#DBEAFE]
-                  text-[#2563EB]
+                  border-blue-100
+                  text-blue-700
                   text-xs
-                  font-semibold
-                  mb-4
+                  font-medium
+                  mb-3
                   "
                 >
                   <ShieldCheck size={12} />
                   Professional Proposal
                 </div>
 
+                {/* TITLE */}
                 <h2
                   className="
-                  text-[32px]
-                  leading-tight
-                  font-[900]
+                  text-2xl
+                  font-semibold
                   tracking-tight
-                  text-[#0F172A]
+                  text-slate-900
                   "
                 >
                   {job.title}
                 </h2>
 
+                {/* SUBTEXT */}
                 <p
                   className="
                   text-sm
-                  text-[#64748B]
-                  mt-3
+                  text-slate-500
+                  mt-1.5
                   "
                 >
                   Send your service proposal to the homeowner
@@ -202,15 +191,13 @@ export default function ProposalModal({ open, onClose, job }) {
             <button
               onClick={onClose}
               className="
-              w-11
-              h-11
-              rounded-2xl
-              bg-[#F8FAFC]
-              hover:bg-red-50
+              w-10
+              h-10
+              rounded-xl
               border
-              border-[#E2E8F0]
-              hover:border-red-100
-              text-[#64748B]
+              border-slate-200
+              bg-white
+              hover:bg-red-50
               hover:text-red-600
               flex
               items-center
@@ -225,44 +212,23 @@ export default function ProposalModal({ open, onClose, job }) {
           </div>
         </div>
 
-        {/* =================================== */}
         {/* FORM */}
-        {/* =================================== */}
-
         <form
           onSubmit={handleSubmit}
           className="
           relative
-          px-8
-          py-8
-          space-y-7
+          px-6
+          py-6
+          space-y-5
           "
         >
           {/* PRICE */}
           <div>
             {/* LABEL */}
-            <div
-              className="
-              flex
-              items-center
-              gap-2
-              mb-3
-              "
-            >
-              <DollarSign
-                size={16}
-                className="
-                text-[#2563EB]
-                "
-              />
+            <div className="flex items-center gap-2 mb-2.5">
+              <DollarSign size={16} className="text-blue-600" />
 
-              <label
-                className="
-                text-sm
-                font-bold
-                text-[#0F172A]
-                "
-              >
+              <label className="text-sm font-medium text-slate-800">
                 Your Price
               </label>
             </div>
@@ -272,12 +238,12 @@ export default function ProposalModal({ open, onClose, job }) {
               <span
                 className="
                 absolute
-                left-5
+                left-4
                 top-1/2
                 -translate-y-1/2
-                text-[22px]
-                font-[900]
-                text-[#2563EB]
+                text-base
+                font-semibold
+                text-blue-600
                 "
               >
                 £
@@ -290,21 +256,22 @@ export default function ProposalModal({ open, onClose, job }) {
                 onChange={(e) => setPrice(e.target.value)}
                 className="
                 w-full
-                h-16
-                rounded-[24px]
+                h-12
+                rounded-2xl
                 border
-                border-[#E2E8F0]
-                bg-[#FAFBFC]
-                pl-14
-                pr-5
-                text-[28px]
-                font-[900]
+                border-slate-200
+                bg-slate-50
+                pl-10
+                pr-4
+                text-lg
+                font-semibold
                 tracking-tight
-                text-[#0F172A]
+                text-slate-800
+                placeholder:text-slate-400
                 outline-none
                 transition-all
                 duration-300
-                focus:border-[#2563EB]
+                focus:border-blue-500
                 focus:bg-white
                 focus:ring-4
                 focus:ring-blue-100
@@ -316,55 +283,36 @@ export default function ProposalModal({ open, onClose, job }) {
           {/* MESSAGE */}
           <div>
             {/* LABEL */}
-            <div
-              className="
-              flex
-              items-center
-              gap-2
-              mb-3
-              "
-            >
-              <FileText
-                size={16}
-                className="
-                text-[#2563EB]
-                "
-              />
+            <div className="flex items-center gap-2 mb-2.5">
+              <FileText size={16} className="text-blue-600" />
 
-              <label
-                className="
-                text-sm
-                font-bold
-                text-[#0F172A]
-                "
-              >
+              <label className="text-sm font-medium text-slate-800">
                 Proposal Message
               </label>
             </div>
 
             {/* TEXTAREA */}
             <textarea
-              rows={6}
+              rows={5}
               placeholder="Describe your experience, timeline, materials, and how you can help with this project..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="
               w-full
-              rounded-[24px]
+              rounded-2xl
               border
-              border-[#E2E8F0]
-              bg-[#FAFBFC]
-              px-5
-              py-5
+              border-slate-200
+              bg-slate-50
+              p-4
               text-sm
-              leading-8
-              text-[#0F172A]
-              placeholder:text-[#94A3B8]
+              leading-7
+              text-slate-700
+              placeholder:text-slate-400
               outline-none
               resize-none
               transition-all
               duration-300
-              focus:border-[#2563EB]
+              focus:border-blue-500
               focus:bg-white
               focus:ring-4
               focus:ring-blue-100
@@ -372,25 +320,25 @@ export default function ProposalModal({ open, onClose, job }) {
             />
           </div>
 
-          {/* INFO CARD */}
+          {/* TIP CARD */}
           <div
             className="
             flex
             items-start
             gap-4
-            rounded-[28px]
+            rounded-2xl
             border
             border-emerald-100
-            bg-emerald-50
+            bg-emerald-50/70
             p-5
             "
           >
             {/* ICON */}
             <div
               className="
-              w-14
-              h-14
-              rounded-[20px]
+              w-11
+              h-11
+              rounded-xl
               bg-emerald-100
               text-emerald-700
               flex
@@ -399,19 +347,12 @@ export default function ProposalModal({ open, onClose, job }) {
               shrink-0
               "
             >
-              <ShieldCheck size={26} />
+              <ShieldCheck size={20} />
             </div>
 
             {/* TEXT */}
             <div>
-              <h3
-                className="
-                text-sm
-                font-bold
-                text-emerald-900
-                mb-2
-                "
-              >
+              <h3 className="text-sm font-semibold text-emerald-900">
                 Professional Tip
               </h3>
 
@@ -419,7 +360,8 @@ export default function ProposalModal({ open, onClose, job }) {
                 className="
                 text-sm
                 leading-7
-                text-emerald-700
+                text-emerald-800/80
+                mt-1.5
                 "
               >
                 Clear pricing and a detailed proposal improve your chances of
@@ -429,29 +371,22 @@ export default function ProposalModal({ open, onClose, job }) {
           </div>
 
           {/* BUTTONS */}
-          <div
-            className="
-            flex
-            items-center
-            gap-4
-            pt-2
-            "
-          >
+          <div className="flex items-center gap-3 pt-1">
             {/* CANCEL */}
             <button
               type="button"
               onClick={onClose}
               className="
               flex-1
-              h-14
-              rounded-[22px]
+              h-11
+              rounded-xl
               border
-              border-[#E2E8F0]
+              border-slate-200
               bg-white
-              hover:bg-[#F8FAFC]
-              text-[#0F172A]
+              hover:bg-slate-50
+              text-slate-700
               text-sm
-              font-bold
+              font-medium
               transition-all
               duration-300
               "
@@ -465,24 +400,26 @@ export default function ProposalModal({ open, onClose, job }) {
               disabled={loading}
               className="
               flex-1
-              h-14
-              rounded-[22px]
-              bg-[#2563EB]
-              hover:bg-[#1D4ED8]
+              h-11
+              rounded-xl
+              bg-blue-600
+              hover:bg-blue-700
               disabled:opacity-50
               text-white
               text-sm
-              font-bold
-              shadow-[0_12px_30px_rgba(37,99,235,0.20)]
+              font-medium
+              shadow-sm
+              hover:shadow-md
               flex
               items-center
               justify-center
-              gap-3
+              gap-2
               transition-all
               duration-300
+              hover:-translate-y-0.5
               "
             >
-              <Send size={17} />
+              <Send size={15} />
 
               {loading ? "Sending..." : "Send Proposal"}
             </button>

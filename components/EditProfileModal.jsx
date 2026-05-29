@@ -49,6 +49,7 @@ export default function EditProfileModal({ open, onClose }) {
 
   useEffect(() => {
     if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       loadProfile();
     }
   }, [open]);
@@ -123,11 +124,11 @@ export default function EditProfileModal({ open, onClose }) {
         z-[101]
         w-[95%]
         sm:w-[620px]
-        max-h-[90vh]
+        max-h-[85vh]
         overflow-y-auto
         -translate-x-1/2
         -translate-y-1/2
-        rounded-[30px]
+        rounded-[22px]
         bg-white
         border
         border-[#E2E8F0]
@@ -154,7 +155,7 @@ export default function EditProfileModal({ open, onClose }) {
         />
 
         {/* CONTENT */}
-        <div className="p-7">
+        <div className="p-5">
           {/* HEADER */}
           <div
             className="
@@ -197,7 +198,7 @@ export default function EditProfileModal({ open, onClose }) {
               <div>
                 <h2
                   className="
-                  text-[28px]
+                  text-[24px]
                   leading-none
                   font-[800]
                   tracking-tight
@@ -241,28 +242,24 @@ export default function EditProfileModal({ open, onClose }) {
           {/* FORM */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* BIO */}
+            {/* BIO */}
             <div>
               <div
                 className="
-                flex
-                items-center
-                gap-2
-                mb-3
-                "
+    flex
+    items-center
+    gap-2
+    mb-2.5
+    "
               >
-                <User2
-                  size={16}
-                  className="
-                  text-[#2563EB]
-                  "
-                />
+                <User2 size={15} className="text-[#2563EB]" />
 
                 <label
                   className="
-                  text-sm
-                  font-semibold
-                  text-[#0F172A]
-                  "
+      text-[13px]
+      font-semibold
+      text-[#0F172A]
+      "
                 >
                   Professional Bio
                 </label>
@@ -270,31 +267,32 @@ export default function EditProfileModal({ open, onClose }) {
 
               <textarea
                 name="bio"
-                rows={5}
+                rows={3}
                 value={formData.bio}
                 onChange={handleChange}
                 placeholder="Tell homeowners about your experience and expertise..."
                 className="
-                w-full
-                rounded-2xl
-                border
-                border-[#E2E8F0]
-                bg-[#FAFBFC]
-                px-5
-                py-4
-                outline-none
-                resize-none
-                text-[15px]
-                leading-8
-                text-[#0F172A]
-                placeholder:text-[#94A3B8]
-                transition-all
-                duration-300
-                focus:border-[#2563EB]
-                focus:bg-white
-                focus:ring-4
-                focus:ring-blue-100
-                "
+    w-full
+    min-h-[110px]
+    rounded-xl
+    border
+    border-[#E2E8F0]
+    bg-[#FAFBFC]
+    px-4
+    py-3
+    outline-none
+    resize-none
+    text-[14px]
+    leading-6
+    text-[#0F172A]
+    placeholder:text-[#94A3B8]
+    transition-all
+    duration-300
+    focus:border-[#2563EB]
+    focus:bg-white
+    focus:ring-4
+    focus:ring-blue-100
+    "
               />
             </div>
 

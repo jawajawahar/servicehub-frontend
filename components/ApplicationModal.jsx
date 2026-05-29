@@ -58,14 +58,15 @@ export default function ApplicationModal({ jobId, onClose }) {
         w-full
         max-w-2xl
         overflow-hidden
-        rounded-[32px]
-        bg-white
+        rounded-[28px]
         border
-        border-[#E2E8F0]
+        border-white/40
+        bg-white/80
+        backdrop-blur-2xl
         shadow-[0_25px_80px_rgba(15,23,42,0.18)]
         "
       >
-        {/* TOP GLOW */}
+        {/* BACKGROUND GLOW */}
         <div
           className="
           absolute
@@ -84,35 +85,24 @@ export default function ApplicationModal({ jobId, onClose }) {
         <div
           className="
           relative
-          px-8
-          pt-8
-          pb-6
+          px-6
+          pt-6
+          pb-5
           border-b
-          border-[#F1F5F9]
+          border-slate-200/70
+          bg-white/60
+          backdrop-blur-xl
           "
         >
-          <div
-            className="
-            flex
-            items-start
-            justify-between
-            gap-4
-            "
-          >
+          <div className="flex items-start justify-between gap-4">
             {/* LEFT */}
-            <div
-              className="
-              flex
-              items-start
-              gap-4
-              "
-            >
+            <div className="flex items-start gap-4">
               {/* ICON */}
               <div
                 className="
-                w-14
-                h-14
-                rounded-3xl
+                w-12
+                h-12
+                rounded-2xl
                 bg-gradient-to-br
                 from-blue-600
                 to-indigo-600
@@ -120,36 +110,35 @@ export default function ApplicationModal({ jobId, onClose }) {
                 flex
                 items-center
                 justify-center
-                shadow-[0_12px_30px_rgba(37,99,235,0.25)]
+                shadow-[0_10px_30px_rgba(37,99,235,0.25)]
                 shrink-0
                 "
               >
-                <Sparkles size={24} />
+                <Sparkles size={20} />
               </div>
 
               {/* TEXT */}
               <div>
                 <h2
                   className="
-                  text-[28px]
-                  font-[800]
+                  text-2xl
+                  font-semibold
                   tracking-tight
-                  text-[#0F172A]
+                  text-slate-900
                   "
                 >
-                  Submit Proposal
+                  PREMIUM TEST MODAL
                 </h2>
 
                 <p
                   className="
                   text-sm
-                  text-[#64748B]
-                  mt-2
+                  text-slate-500
+                  mt-1.5
                   leading-6
                   "
                 >
-                  Send a professional application to the homeowner with pricing
-                  and project details.
+                  Send your service proposal to the homeowner
                 </p>
               </div>
             </div>
@@ -158,15 +147,13 @@ export default function ApplicationModal({ jobId, onClose }) {
             <button
               onClick={onClose}
               className="
-              w-11
-              h-11
-              rounded-2xl
-              bg-[#F8FAFC]
-              hover:bg-red-50
+              w-10
+              h-10
+              rounded-xl
               border
-              border-[#E2E8F0]
-              hover:border-red-100
-              text-[#64748B]
+              border-slate-200
+              bg-white
+              hover:bg-red-50
               hover:text-red-600
               flex
               items-center
@@ -185,101 +172,19 @@ export default function ApplicationModal({ jobId, onClose }) {
           onSubmit={handleSubmit}
           className="
           relative
-          px-8
-          py-7
-          space-y-6
+          px-6
+          py-6
+          space-y-5
           "
         >
-          {/* MESSAGE */}
-          <div>
-            {/* LABEL */}
-            <div
-              className="
-              flex
-              items-center
-              gap-2
-              mb-3
-              "
-            >
-              <MessageSquare
-                size={16}
-                className="
-                text-[#2563EB]
-                "
-              />
-
-              <label
-                className="
-                text-sm
-                font-semibold
-                text-[#0F172A]
-                "
-              >
-                Proposal Message
-              </label>
-            </div>
-
-            {/* TEXTAREA */}
-            <textarea
-              rows={6}
-              value={form.message}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  message: e.target.value,
-                })
-              }
-              placeholder="Describe your experience, timeline, and how you can help with this project..."
-              className="
-              w-full
-              rounded-2xl
-              border
-              border-[#E2E8F0]
-              bg-[#FAFBFC]
-              px-5
-              py-4
-              text-[15px]
-              leading-7
-              text-[#0F172A]
-              placeholder:text-[#94A3B8]
-              outline-none
-              resize-none
-              transition-all
-              duration-300
-              focus:border-[#2563EB]
-              focus:bg-white
-              focus:ring-4
-              focus:ring-blue-100
-              "
-            />
-          </div>
-
           {/* PRICE */}
           <div>
             {/* LABEL */}
-            <div
-              className="
-              flex
-              items-center
-              gap-2
-              mb-3
-              "
-            >
-              <PoundSterling
-                size={16}
-                className="
-                text-[#2563EB]
-                "
-              />
+            <div className="flex items-center gap-2 mb-2.5">
+              <PoundSterling size={16} className="text-blue-600" />
 
-              <label
-                className="
-                text-sm
-                font-semibold
-                text-[#0F172A]
-                "
-              >
-                Estimated Price
+              <label className="text-sm font-medium text-slate-800">
+                Your Price
               </label>
             </div>
 
@@ -288,11 +193,11 @@ export default function ApplicationModal({ jobId, onClose }) {
               <div
                 className="
                 absolute
-                left-5
+                left-4
                 top-1/2
                 -translate-y-1/2
-                text-[#64748B]
-                text-sm
+                text-slate-500
+                text-base
                 font-semibold
                 "
               >
@@ -311,20 +216,21 @@ export default function ApplicationModal({ jobId, onClose }) {
                 placeholder="120"
                 className="
                 w-full
-                h-14
+                h-12
                 rounded-2xl
                 border
-                border-[#E2E8F0]
-                bg-[#FAFBFC]
+                border-slate-200
+                bg-slate-50
                 pl-10
-                pr-5
-                text-[15px]
-                text-[#0F172A]
-                placeholder:text-[#94A3B8]
+                pr-4
+                text-lg
+                font-semibold
+                text-slate-800
+                placeholder:text-slate-400
                 outline-none
                 transition-all
                 duration-300
-                focus:border-[#2563EB]
+                focus:border-blue-500
                 focus:bg-white
                 focus:ring-4
                 focus:ring-blue-100
@@ -333,62 +239,98 @@ export default function ApplicationModal({ jobId, onClose }) {
             </div>
           </div>
 
-          {/* INFO CARD */}
+          {/* MESSAGE */}
+          <div>
+            {/* LABEL */}
+            <div className="flex items-center gap-2 mb-2.5">
+              <MessageSquare size={16} className="text-blue-600" />
+
+              <label className="text-sm font-medium text-slate-800">
+                Proposal Message
+              </label>
+            </div>
+
+            {/* TEXTAREA */}
+            <textarea
+              rows={5}
+              value={form.message}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  message: e.target.value,
+                })
+              }
+              placeholder="Describe your experience, timeline, materials, and how you can help with this project..."
+              className="
+              w-full
+              rounded-2xl
+              border
+              border-slate-200
+              bg-slate-50
+              p-4
+              text-sm
+              leading-7
+              text-slate-700
+              placeholder:text-slate-400
+              outline-none
+              resize-none
+              transition-all
+              duration-300
+              focus:border-blue-500
+              focus:bg-white
+              focus:ring-4
+              focus:ring-blue-100
+              "
+            />
+          </div>
+
+          {/* TIP CARD */}
           <div
             className="
-            p-5
+            flex
+            items-start
+            gap-4
             rounded-2xl
-            bg-[#F8FAFC]
             border
-            border-[#EEF2F7]
+            border-emerald-100
+            bg-emerald-50/70
+            p-5
             "
           >
+            {/* ICON */}
             <div
               className="
+              w-12
+              h-12
+              rounded-2xl
+              bg-emerald-100
+              text-emerald-700
               flex
-              items-start
-              gap-3
+              items-center
+              justify-center
+              shrink-0
               "
             >
-              <div
+              <Send size={18} />
+            </div>
+
+            {/* TEXT */}
+            <div>
+              <h4 className="text-sm font-semibold text-emerald-900">
+                Professional Tip
+              </h4>
+
+              <p
                 className="
-                w-10
-                h-10
-                rounded-2xl
-                bg-[#EFF6FF]
-                text-[#2563EB]
-                flex
-                items-center
-                justify-center
-                shrink-0
+                text-sm
+                text-emerald-800/80
+                mt-1.5
+                leading-7
                 "
               >
-                <Send size={18} />
-              </div>
-
-              <div>
-                <h4
-                  className="
-                  text-sm
-                  font-semibold
-                  text-[#0F172A]
-                  "
-                >
-                  Professional Tip
-                </h4>
-
-                <p
-                  className="
-                  text-sm
-                  text-[#64748B]
-                  mt-1
-                  leading-6
-                  "
-                >
-                  A detailed proposal with pricing transparency increases your
-                  chances of getting hired.
-                </p>
-              </div>
+                Clear pricing and a detailed proposal improve your chances of
+                getting accepted.
+              </p>
             </div>
           </div>
 
@@ -399,7 +341,7 @@ export default function ApplicationModal({ jobId, onClose }) {
             items-center
             justify-end
             gap-3
-            pt-2
+            pt-1
             "
           >
             {/* CANCEL */}
@@ -407,16 +349,16 @@ export default function ApplicationModal({ jobId, onClose }) {
               type="button"
               onClick={onClose}
               className="
-              h-12
+              h-11
               px-5
-              rounded-2xl
+              rounded-xl
               border
-              border-[#E2E8F0]
+              border-slate-200
               bg-white
-              hover:bg-[#F8FAFC]
-              text-[#475569]
+              hover:bg-slate-50
+              text-slate-600
               text-sm
-              font-semibold
+              font-medium
               transition-all
               duration-300
               "
@@ -429,21 +371,23 @@ export default function ApplicationModal({ jobId, onClose }) {
               type="submit"
               disabled={loading}
               className="
-              h-12
+              h-11
               px-6
-              rounded-2xl
-              bg-[#2563EB]
-              hover:bg-[#1D4ED8]
+              rounded-xl
+              bg-blue-600
+              hover:bg-blue-700
               disabled:opacity-70
               text-white
               text-sm
-              font-semibold
-              shadow-[0_10px_25px_rgba(37,99,235,0.20)]
+              font-medium
+              shadow-sm
+              hover:shadow-md
               flex
               items-center
               gap-2
               transition-all
               duration-300
+              hover:-translate-y-0.5
               "
             >
               {loading ? (
@@ -463,7 +407,7 @@ export default function ApplicationModal({ jobId, onClose }) {
                 </>
               ) : (
                 <>
-                  <Send size={16} />
+                  <Send size={15} />
                   Submit Proposal
                 </>
               )}

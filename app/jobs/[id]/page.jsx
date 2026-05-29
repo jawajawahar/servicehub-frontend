@@ -67,6 +67,7 @@ export default function JobDetailPage() {
 
   useEffect(() => {
     if (id) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchJob();
 
       fetchApplications();

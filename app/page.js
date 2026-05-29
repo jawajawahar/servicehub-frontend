@@ -88,6 +88,7 @@ export default function HomePage() {
   // EFFECTS
   // ===================================
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchJobs();
   }, [user, search, category, status, sort]);
 

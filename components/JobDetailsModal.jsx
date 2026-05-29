@@ -1,9 +1,7 @@
 "use client";
 
 import toast from "react-hot-toast";
-
 import api from "../services/api";
-
 import { useAuth } from "../context/AuthContext";
 
 import {
@@ -141,14 +139,15 @@ export default function JobDetailsModal({ open, onClose, job }) {
         className="
         relative
         w-full
-        max-w-6xl
-        h-[92vh]
+        max-w-4xl
+        h-[85vh]
         overflow-hidden
-        rounded-[32px]
+        rounded-[28px]
         border
-        border-[#E2E8F0]
-        bg-[#F8FAFC]
-        shadow-[0_30px_100px_rgba(15,23,42,0.22)]
+        border-white/40
+        bg-white/80
+        backdrop-blur-2xl
+        shadow-[0_25px_80px_rgba(15,23,42,0.18)]
         flex
         flex-col
         "
@@ -157,59 +156,41 @@ export default function JobDetailsModal({ open, onClose, job }) {
         <div
           className="
           shrink-0
-          px-7
-          py-6
+          px-6
+          py-5
           border-b
-          border-[#E2E8F0]
-          bg-white/90
+          border-slate-200/70
+          bg-white/70
           backdrop-blur-xl
           "
         >
-          <div
-            className="
-            flex
-            items-start
-            justify-between
-            gap-6
-            "
-          >
-            {/* LEFT */}
+          <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
               {/* TAGS */}
-              <div
-                className="
-                flex
-                items-center
-                gap-3
-                flex-wrap
-                mb-5
-                "
-              >
-                {/* CATEGORY */}
+              <div className="flex items-center gap-2 flex-wrap mb-3">
                 <div
                   className="
-                  px-4
-                  py-2
-                  rounded-2xl
-                  bg-[#EFF6FF]
+                  px-3
+                  py-1
+                  rounded-full
+                  bg-blue-50
                   border
-                  border-[#DBEAFE]
-                  text-[#2563EB]
-                  text-sm
-                  font-semibold
+                  border-blue-100
+                  text-blue-700
+                  text-xs
+                  font-medium
                   "
                 >
                   {job.category}
                 </div>
 
-                {/* STATUS */}
                 <div
                   className={`
-                  px-4
-                  py-2
-                  rounded-2xl
-                  text-sm
-                  font-semibold
+                  px-3
+                  py-1
+                  rounded-full
+                  text-xs
+                  font-medium
                   ${statusColors[job.status]}
                   `}
                 >
@@ -220,11 +201,11 @@ export default function JobDetailsModal({ open, onClose, job }) {
               {/* TITLE */}
               <h2
                 className="
-                text-[34px]
-                leading-tight
-                font-[900]
+                text-2xl
+                md:text-3xl
+                font-semibold
                 tracking-tight
-                text-[#0F172A]
+                text-slate-900
                 "
               >
                 {job.title}
@@ -236,35 +217,19 @@ export default function JobDetailsModal({ open, onClose, job }) {
                 flex
                 flex-wrap
                 items-center
-                gap-6
-                mt-5
+                gap-4
+                mt-3
                 text-sm
-                text-[#64748B]
+                text-slate-500
                 "
               >
-                {/* LOCATION */}
-                <div
-                  className="
-                  flex
-                  items-center
-                  gap-2
-                  "
-                >
-                  <MapPin size={16} />
-
+                <div className="flex items-center gap-2">
+                  <MapPin size={15} />
                   <span>{job.location}</span>
                 </div>
 
-                {/* DATE */}
-                <div
-                  className="
-                  flex
-                  items-center
-                  gap-2
-                  "
-                >
-                  <Clock3 size={16} />
-
+                <div className="flex items-center gap-2">
+                  <Clock3 size={15} />
                   <span>{new Date(job.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
@@ -274,22 +239,19 @@ export default function JobDetailsModal({ open, onClose, job }) {
             <button
               onClick={onClose}
               className="
-              w-11
-              h-11
-              rounded-2xl
-              bg-[#F8FAFC]
-              hover:bg-red-50
+              w-10
+              h-10
+              rounded-xl
               border
-              border-[#E2E8F0]
-              hover:border-red-100
-              text-[#64748B]
+              border-slate-200
+              bg-white
+              hover:bg-red-50
               hover:text-red-600
               flex
               items-center
               justify-center
               transition-all
               duration-300
-              shrink-0
               "
             >
               <X size={18} />
@@ -302,131 +264,80 @@ export default function JobDetailsModal({ open, onClose, job }) {
           className="
           flex-1
           overflow-y-auto
-          px-7
-          py-7
+          p-6
           "
         >
-          {/* IMAGES */}
+          {/* HERO IMAGE */}
           {job.images && job.images.length > 0 && (
             <div
               className="
-              grid
-              grid-cols-1
-              md:grid-cols-2
-              xl:grid-cols-3
-              gap-5
-              mb-8
+              relative
+              overflow-hidden
+              rounded-[24px]
+              border
+              border-slate-200
+              bg-white
+              shadow-sm
+              mb-6
               "
             >
-              {job.images.map((image, index) => (
-                <div
-                  key={index}
-                  className="
-                  group
-                  relative
-                  overflow-hidden
-                  rounded-[26px]
-                  border
-                  border-[#E2E8F0]
-                  bg-white
-                  shadow-sm
-                  "
-                >
-                  <img
-                    src={image}
-                    alt="job"
-                    className="
-                    w-full
-                    h-[250px]
-                    object-cover
-                    transition-transform
-                    duration-700
-                    group-hover:scale-105
-                    "
-                  />
-
-                  <div
-                    className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/30
-                    to-transparent
-                    opacity-0
-                    group-hover:opacity-100
-                    transition-all
-                    duration-300
-                    "
-                  />
-                </div>
-              ))}
+              <img
+                src={job.images[0]}
+                alt="job"
+                className="
+                w-full
+                h-[260px]
+                object-cover
+                "
+              />
             </div>
           )}
 
-          {/* GRID */}
+          {/* CONTENT */}
           <div
             className="
             grid
             grid-cols-1
-            xl:grid-cols-3
-            gap-6
+            lg:grid-cols-[1.7fr_0.9fr]
+            gap-5
             "
           >
-            {/* LEFT CONTENT */}
-            <div className="xl:col-span-2 space-y-6">
+            {/* LEFT */}
+            <div className="space-y-5">
               {/* DESCRIPTION */}
               <div
                 className="
-                rounded-[28px]
+                rounded-[22px]
                 border
-                border-[#E2E8F0]
-                bg-white
-                p-6
+                border-slate-200/70
+                bg-white/90
+                backdrop-blur-xl
+                p-5
                 shadow-sm
                 "
               >
-                <div
-                  className="
-                  flex
-                  items-center
-                  gap-3
-                  mb-5
-                  "
-                >
+                <div className="flex items-center gap-3 mb-4">
                   <div
                     className="
-                    w-11
-                    h-11
-                    rounded-2xl
-                    bg-[#EFF6FF]
-                    text-[#2563EB]
+                    w-10
+                    h-10
+                    rounded-xl
+                    bg-blue-50
+                    text-blue-600
                     flex
                     items-center
                     justify-center
                     "
                   >
-                    <Sparkles size={18} />
+                    <Sparkles size={17} />
                   </div>
 
                   <div>
-                    <h3
-                      className="
-                      text-[22px]
-                      font-[800]
-                      tracking-tight
-                      text-[#0F172A]
-                      "
-                    >
+                    <h3 className="text-lg font-semibold text-slate-900">
                       Description
                     </h3>
 
-                    <p
-                      className="
-                      text-sm
-                      text-[#64748B]
-                      mt-1
-                      "
-                    >
+                    <p className="text-sm text-slate-500">
                       Job details and requirements
                     </p>
                   </div>
@@ -435,70 +346,50 @@ export default function JobDetailsModal({ open, onClose, job }) {
                 <p
                   className="
                   text-[15px]
-                  leading-8
-                  text-[#475569]
+                  leading-7
+                  text-slate-600
                   "
                 >
                   {job.description}
                 </p>
               </div>
 
-              {/* REVIEW SECTION */}
+              {/* REVIEW */}
               {user &&
                 user.role === "homeowner" &&
                 job.status === "Completed" && (
                   <div
                     className="
-                    rounded-[28px]
+                    rounded-[22px]
                     border
-                    border-[#E2E8F0]
-                    bg-white
-                    p-6
+                    border-slate-200/70
+                    bg-white/90
+                    p-5
                     shadow-sm
                     "
                   >
-                    <h3
-                      className="
-                      text-[22px]
-                      font-[800]
-                      tracking-tight
-                      text-[#0F172A]
-                      mb-6
-                      "
-                    >
+                    <h3 className="text-lg font-semibold text-slate-900 mb-5">
                       Leave Review
                     </h3>
 
                     {/* STARS */}
-                    <div
-                      className="
-                      flex
-                      items-center
-                      gap-3
-                      mb-6
-                      "
-                    >
+                    <div className="flex items-center gap-2 mb-5">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <button
                           key={star}
                           onClick={() => setRating(star)}
                           className="
-                            transition-all
-                            duration-300
-                            hover:scale-110
-                            "
+                          transition-all
+                          duration-300
+                          hover:scale-110
+                          "
                         >
                           <Star
-                            size={30}
+                            size={24}
                             className={
                               star <= rating
-                                ? `
-                                    fill-yellow-400
-                                    text-yellow-400
-                                  `
-                                : `
-                                    text-gray-300
-                                  `
+                                ? "fill-yellow-400 text-yellow-400"
+                                : "text-gray-300"
                             }
                           />
                         </button>
@@ -507,27 +398,24 @@ export default function JobDetailsModal({ open, onClose, job }) {
 
                     {/* COMMENT */}
                     <textarea
-                      rows={5}
+                      rows={4}
                       placeholder="Write your review..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                       className="
                       w-full
-                      rounded-2xl
+                      rounded-xl
                       border
-                      border-[#E2E8F0]
-                      bg-[#FAFBFC]
-                      p-5
+                      border-slate-200
+                      bg-slate-50
+                      p-4
                       outline-none
                       resize-none
                       text-sm
                       leading-7
-                      text-[#0F172A]
-                      placeholder:text-[#94A3B8]
-                      transition-all
-                      duration-300
-                      focus:border-[#2563EB]
-                      focus:bg-white
+                      text-slate-700
+                      placeholder:text-slate-400
+                      focus:border-blue-500
                       focus:ring-4
                       focus:ring-blue-100
                       "
@@ -538,59 +426,55 @@ export default function JobDetailsModal({ open, onClose, job }) {
                       onClick={handleSubmitReview}
                       disabled={reviewLoading}
                       className="
-                      mt-5
+                      mt-4
                       w-full
-                      h-12
-                      rounded-2xl
-                      bg-[#0F172A]
-                      hover:bg-[#111827]
+                      h-10
+                      rounded-xl
+                      bg-slate-900
+                      hover:bg-black
                       text-white
                       text-sm
-                      font-semibold
+                      font-medium
                       flex
                       items-center
                       justify-center
                       gap-2
+                      shadow-sm
+                      hover:shadow-md
                       transition-all
                       duration-300
+                      hover:-translate-y-0.5
                       "
                     >
                       {reviewLoading ? "Submitting..." : "Submit Review"}
 
-                      <ArrowUpRight size={16} />
+                      <ArrowUpRight size={15} />
                     </button>
                   </div>
                 )}
             </div>
 
-            {/* RIGHT SIDEBAR */}
-            <div className="space-y-6">
+            {/* RIGHT */}
+            <div className="space-y-5 lg:sticky lg:top-0 self-start">
               {/* SCHEDULE */}
               {job.scheduledDate && (
                 <div
                   className="
-                  rounded-[28px]
+                  rounded-[22px]
                   border
                   border-indigo-100
                   bg-gradient-to-br
                   from-indigo-50
                   to-blue-50
-                  p-6
+                  p-5
                   "
                 >
-                  <div
-                    className="
-                    flex
-                    items-center
-                    gap-3
-                    mb-5
-                    "
-                  >
+                  <div className="flex items-center gap-3 mb-4">
                     <div
                       className="
-                      w-11
-                      h-11
-                      rounded-2xl
+                      w-10
+                      h-10
+                      rounded-xl
                       bg-white
                       text-indigo-600
                       flex
@@ -599,39 +483,21 @@ export default function JobDetailsModal({ open, onClose, job }) {
                       shadow-sm
                       "
                     >
-                      <CalendarDays size={18} />
+                      <CalendarDays size={17} />
                     </div>
 
                     <div>
-                      <h3
-                        className="
-                        text-lg
-                        font-bold
-                        text-[#312E81]
-                        "
-                      >
+                      <h3 className="text-base font-semibold text-slate-900">
                         Scheduled Visit
                       </h3>
 
-                      <p
-                        className="
-                        text-sm
-                        text-indigo-500
-                        "
-                      >
+                      <p className="text-sm text-indigo-500">
                         Appointment date
                       </p>
                     </div>
                   </div>
 
-                  <p
-                    className="
-                    text-[17px]
-                    font-[700]
-                    leading-8
-                    text-[#1E293B]
-                    "
-                  >
+                  <p className="text-sm font-medium text-slate-700 leading-7">
                     {new Date(job.scheduledDate).toLocaleString()}
                   </p>
                 </div>
@@ -640,22 +506,16 @@ export default function JobDetailsModal({ open, onClose, job }) {
               {/* ACTIONS */}
               <div
                 className="
-                rounded-[28px]
+                rounded-[22px]
                 border
-                border-[#E2E8F0]
-                bg-white
-                p-6
+                border-slate-200/70
+                bg-white/90
+                p-5
                 shadow-sm
-                space-y-4
+                space-y-3
                 "
               >
-                <h3
-                  className="
-                  text-lg
-                  font-[800]
-                  text-[#0F172A]
-                  "
-                >
+                <h3 className="text-base font-semibold text-slate-900">
                   Job Actions
                 </h3>
 
@@ -667,15 +527,18 @@ export default function JobDetailsModal({ open, onClose, job }) {
                       onClick={handleStartJob}
                       className="
                       w-full
-                      h-12
-                      rounded-2xl
+                      h-10
+                      rounded-xl
                       bg-amber-500
                       hover:bg-amber-600
                       text-white
                       text-sm
-                      font-semibold
+                      font-medium
+                      shadow-sm
+                      hover:shadow-md
                       transition-all
                       duration-300
+                      hover:-translate-y-0.5
                       "
                     >
                       Start Job
@@ -690,22 +553,25 @@ export default function JobDetailsModal({ open, onClose, job }) {
                       onClick={handleCompleteJob}
                       className="
                       w-full
-                      h-12
-                      rounded-2xl
+                      h-10
+                      rounded-xl
                       bg-emerald-600
                       hover:bg-emerald-700
                       text-white
                       text-sm
-                      font-semibold
+                      font-medium
                       flex
                       items-center
                       justify-center
                       gap-2
+                      shadow-sm
+                      hover:shadow-md
                       transition-all
                       duration-300
+                      hover:-translate-y-0.5
                       "
                     >
-                      <CheckCircle2 size={17} />
+                      <CheckCircle2 size={15} />
                       Complete Service
                     </button>
                   )}
@@ -718,15 +584,18 @@ export default function JobDetailsModal({ open, onClose, job }) {
                       onClick={() => setPaymentOpen(true)}
                       className="
                       w-full
-                      h-12
-                      rounded-2xl
-                      bg-[#2563EB]
-                      hover:bg-[#1D4ED8]
+                      h-10
+                      rounded-xl
+                      bg-blue-600
+                      hover:bg-blue-700
                       text-white
                       text-sm
-                      font-semibold
+                      font-medium
+                      shadow-sm
+                      hover:shadow-md
                       transition-all
                       duration-300
+                      hover:-translate-y-0.5
                       "
                     >
                       Proceed Payment
@@ -738,21 +607,21 @@ export default function JobDetailsModal({ open, onClose, job }) {
                   <div
                     className="
                     w-full
-                    h-12
-                    rounded-2xl
+                    h-10
+                    rounded-xl
                     bg-blue-50
                     border
                     border-blue-100
                     text-blue-700
                     text-sm
-                    font-semibold
+                    font-medium
                     flex
                     items-center
                     justify-center
                     gap-2
                     "
                   >
-                    <CheckCircle2 size={16} />
+                    <CheckCircle2 size={15} />
                     Service Completed
                   </div>
                 )}

@@ -60,7 +60,7 @@ export default function ApplicationPanel() {
   };
 
   // =========================================
-  // ACCEPT
+  // ACCEPT APPLICATION
   // =========================================
 
   const acceptApplication = async (id) => {
@@ -84,7 +84,7 @@ export default function ApplicationPanel() {
   };
 
   // =========================================
-  // REJECT
+  // REJECT APPLICATION
   // =========================================
 
   const rejectApplication = async (id) => {
@@ -115,7 +115,7 @@ export default function ApplicationPanel() {
   }, []);
 
   // =========================================
-  // REALTIME SOCKET
+  // SOCKET REALTIME
   // =========================================
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function ApplicationPanel() {
   }, []);
 
   // =========================================
-  // OUTSIDE CLICK CLOSE
+  // CLOSE ON OUTSIDE CLICK
   // =========================================
 
   useEffect(() => {
@@ -231,13 +231,17 @@ export default function ApplicationPanel() {
           <div
             ref={panelRef}
             className="
-            w-[980px]
-            h-screen
-            bg-white
+            w-[820px]
+            h-[88vh]
+            mt-6
+            rounded-r-[32px]
+            bg-white/95
+            backdrop-blur-xl
             shadow-[0_12px_40px_rgba(15,23,42,0.15)]
             overflow-hidden
             flex
             border-r
+            border
             border-slate-200
             "
           >
@@ -245,10 +249,10 @@ export default function ApplicationPanel() {
 
             <div
               className="
-              w-[320px]
+              w-[250px]
               border-r
-              border-slate-200
-              bg-slate-50
+              border-slate-100
+              bg-slate-50/70
               flex
               flex-col
               "
@@ -257,17 +261,19 @@ export default function ApplicationPanel() {
 
               <div
                 className="
-                p-5
+                px-5
+                py-4
                 border-b
-                border-slate-200
-                bg-white
+                border-slate-100
+                bg-white/80
+                backdrop-blur-xl
                 "
               >
                 <div className="flex items-center gap-3">
                   <div
                     className="
-                    w-11
-                    h-11
+                    w-10
+                    h-10
                     rounded-2xl
                     bg-gradient-to-br
                     from-blue-600
@@ -279,22 +285,22 @@ export default function ApplicationPanel() {
                     shadow-md
                     "
                   >
-                    <Sparkles size={18} />
+                    <Sparkles size={17} />
                   </div>
 
                   <div>
-                    <h2 className="text-[18px] font-[800] text-slate-900">
+                    <h2 className="text-[17px] font-[800] text-slate-900">
                       Applications
                     </h2>
 
-                    <p className="text-[12px] text-slate-500 mt-1">
+                    <p className="text-[11px] text-slate-500 mt-1">
                       Submitted proposals
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* APPLICANT LIST */}
+              {/* APPLICANTS */}
 
               <div
                 className="
@@ -312,23 +318,25 @@ export default function ApplicationPanel() {
                     w-full
                     text-left
                     rounded-2xl
-                    p-4
+                    px-3
+                    py-3
                     border
                     transition-all
                     duration-300
+                    group
 
                     ${
                       selectedApplicant?._id === app._id
                         ? `
-                          bg-blue-50
+                          bg-white
                           border-blue-200
-                          shadow-sm
+                          shadow-[0_4px_20px_rgba(59,130,246,0.12)]
                         `
                         : `
-                          bg-white
-                          border-slate-200
-                          hover:border-blue-200
-                          hover:shadow-sm
+                          bg-white/70
+                          border-slate-100
+                          hover:border-blue-100
+                          hover:shadow-[0_4px_18px_rgba(15,23,42,0.06)]
                         `
                     }
                   `}
@@ -338,14 +346,14 @@ export default function ApplicationPanel() {
 
                       <div
                         className="
-                        w-12
-                        h-12
+                        w-10
+                        h-10
                         rounded-2xl
                         bg-gradient-to-br
                         from-blue-600
                         to-indigo-600
                         text-white
-                        text-[16px]
+                        text-[14px]
                         font-black
                         flex
                         items-center
@@ -361,8 +369,9 @@ export default function ApplicationPanel() {
                       <div className="flex-1 min-w-0">
                         <h3
                           className="
-                          text-[14px]
-                          font-[800]
+                          text-[13px]
+                          font-[700]
+                          tracking-[-0.2px]
                           text-slate-900
                           truncate
                           "
@@ -372,7 +381,8 @@ export default function ApplicationPanel() {
 
                         <p
                           className="
-                          text-[12px]
+                          text-[11px]
+                          font-medium
                           text-slate-500
                           mt-1
                           truncate
@@ -382,7 +392,14 @@ export default function ApplicationPanel() {
                         </p>
                       </div>
 
-                      <ChevronRight size={16} className="text-slate-400" />
+                      <ChevronRight
+                        size={15}
+                        className="
+                        text-slate-400
+                        group-hover:text-blue-500
+                        transition-all
+                        "
+                      />
                     </div>
                   </button>
                 ))}
@@ -399,8 +416,8 @@ export default function ApplicationPanel() {
               "
             >
               {selectedApplicant ? (
-                <div className="p-8">
-                  {/* TOP SECTION */}
+                <div className="p-6">
+                  {/* PROFILE SECTION */}
 
                   <div
                     className="
@@ -408,9 +425,9 @@ export default function ApplicationPanel() {
                     items-start
                     justify-between
                     gap-5
-                    pb-6
+                    pb-5
                     border-b
-                    border-slate-200
+                    border-slate-100
                     "
                   >
                     {/* PROFILE */}
@@ -418,26 +435,34 @@ export default function ApplicationPanel() {
                     <div className="flex gap-4">
                       <div
                         className="
-                        w-16
-                        h-16
+                        w-14
+                        h-14
                         rounded-3xl
                         bg-gradient-to-br
                         from-blue-600
                         to-indigo-600
                         text-white
-                        text-[22px]
+                        text-[20px]
                         font-black
                         flex
                         items-center
                         justify-center
+                        shadow-md
                         "
                       >
                         {selectedApplicant?.tradesperson?.name?.charAt(0)}
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-2">
-                          <h2 className="text-[22px] font-[800] text-slate-900">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h2
+                            className="
+                            text-[20px]
+                            font-[800]
+                            tracking-[-0.4px]
+                            text-slate-900
+                            "
+                          >
                             {selectedApplicant?.tradesperson?.name}
                           </h2>
 
@@ -486,23 +511,26 @@ export default function ApplicationPanel() {
                       </div>
                     </div>
 
-                    {/* PRICE */}
+                    {/* PRICE CARD */}
 
                     <div
                       className="
-                      px-5
-                      py-4
+                      px-4
+                      py-3
                       rounded-3xl
-                      bg-blue-50
+                      bg-gradient-to-br
+                      from-blue-50
+                      to-indigo-50
                       border
                       border-blue-100
+                      min-w-[130px]
                       "
                     >
-                      <div className="text-[24px] font-[800] text-blue-700">
+                      <div className="text-[20px] font-[800] text-blue-700">
                         £{selectedApplicant?.estimatedPrice}
                       </div>
 
-                      <p className="text-[12px] text-slate-500 mt-1">
+                      <p className="text-[11px] text-slate-500 mt-1">
                         Estimated Budget
                       </p>
                     </div>
@@ -510,8 +538,8 @@ export default function ApplicationPanel() {
 
                   {/* JOB TITLE */}
 
-                  <div className="mt-6">
-                    <h3 className="text-[14px] font-[700] text-slate-500 mb-2">
+                  <div className="mt-5">
+                    <h3 className="text-[13px] font-[700] text-slate-500 mb-2">
                       Job Title
                     </h3>
 
@@ -519,38 +547,39 @@ export default function ApplicationPanel() {
                       className="
                       rounded-2xl
                       border
-                      border-slate-200
-                      bg-slate-50
+                      border-slate-100
+                      bg-slate-50/70
                       p-4
-                      text-[15px]
-                      font-semibold
-                      text-slate-800
+                      shadow-sm
                       "
                     >
-                      {selectedApplicant?.jobTitle}
+                      <p className="text-[14px] font-semibold text-slate-800">
+                        {selectedApplicant?.jobTitle}
+                      </p>
                     </div>
                   </div>
 
-                  {/* PROPOSAL */}
+                  {/* PROPOSAL MESSAGE */}
 
-                  <div className="mt-6">
-                    <h3 className="text-[14px] font-[700] text-slate-500 mb-2">
+                  <div className="mt-5">
+                    <h3 className="text-[13px] font-[700] text-slate-500 mb-2">
                       Proposal Message
                     </h3>
 
                     <div
                       className="
                       rounded-2xl
-                      bg-slate-50
                       border
-                      border-slate-200
-                      p-5
+                      border-slate-100
+                      bg-slate-50/70
+                      p-4
+                      shadow-sm
                       "
                     >
                       <p
                         className="
-                        text-[15px]
-                        leading-8
+                        text-[14px]
+                        leading-7
                         text-slate-700
                         whitespace-pre-line
                         "
@@ -560,24 +589,24 @@ export default function ApplicationPanel() {
                     </div>
                   </div>
 
-                  {/* ACTION BUTTONS */}
+                  {/* ACTIONS */}
 
                   <div
                     className="
                     flex
                     justify-end
                     gap-3
-                    mt-8
-                    pt-6
+                    mt-6
+                    pt-5
                     border-t
-                    border-slate-200
+                    border-slate-100
                     "
                   >
                     <button
                       onClick={() => rejectApplication(selectedApplicant._id)}
                       disabled={loading}
                       className="
-                      h-11
+                      h-10
                       px-5
                       rounded-2xl
                       bg-red-50
@@ -585,9 +614,10 @@ export default function ApplicationPanel() {
                       border
                       border-red-100
                       text-red-600
-                      text-[14px]
+                      text-[13px]
                       font-semibold
                       transition-all
+                      duration-300
                       "
                     >
                       Reject
@@ -597,15 +627,20 @@ export default function ApplicationPanel() {
                       onClick={() => acceptApplication(selectedApplicant._id)}
                       disabled={loading}
                       className="
-                      h-11
+                      h-10
                       px-5
                       rounded-2xl
-                      bg-emerald-500
-                      hover:bg-emerald-600
+                      bg-gradient-to-r
+                      from-emerald-500
+                      to-green-500
+                      hover:scale-[1.02]
                       text-white
-                      text-[14px]
+                      text-[13px]
                       font-semibold
+                      shadow-lg
+                      shadow-emerald-500/20
                       transition-all
+                      duration-300
                       "
                     >
                       Accept
@@ -615,14 +650,14 @@ export default function ApplicationPanel() {
               ) : (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
-                    <Briefcase size={40} className="mx-auto text-slate-300" />
+                    <Briefcase size={36} className="mx-auto text-slate-300" />
 
-                    <h3 className="mt-4 text-[18px] font-[700] text-slate-700">
+                    <h3 className="mt-4 text-[17px] font-[700] text-slate-700">
                       No Application Selected
                     </h3>
 
                     <p className="mt-2 text-[13px] text-slate-500">
-                      Select an applicant to view full proposal details
+                      Select an applicant to view details
                     </p>
                   </div>
                 </div>

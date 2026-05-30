@@ -110,7 +110,6 @@ export default function ApplicationPanel() {
   // =========================================
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchApplications();
   }, []);
 
@@ -223,16 +222,22 @@ export default function ApplicationPanel() {
           className="
           fixed
           top-0
-          left-0
+          left-[12px]
+          sm:left-[20px]
+          md:left-[28px]
           h-screen
           z-[80]
+          flex
+          items-start
           "
         >
           <div
             ref={panelRef}
             className="
-            w-[820px]
-            h-[88vh]
+            w-[95vw]
+            max-w-[820px]
+            h-[85vh]
+            sm:h-[88vh]
             mt-6
             rounded-r-[32px]
             bg-white/95
@@ -249,7 +254,8 @@ export default function ApplicationPanel() {
 
             <div
               className="
-              w-[250px]
+              w-[220px]
+              sm:w-[240px]
               border-r
               border-slate-100
               bg-slate-50/70
@@ -261,7 +267,7 @@ export default function ApplicationPanel() {
 
               <div
                 className="
-                px-5
+                px-4
                 py-4
                 border-b
                 border-slate-100
@@ -283,17 +289,18 @@ export default function ApplicationPanel() {
                     items-center
                     justify-center
                     shadow-md
+                    shrink-0
                     "
                   >
-                    <Sparkles size={17} />
+                    <Sparkles size={16} />
                   </div>
 
-                  <div>
-                    <h2 className="text-[17px] font-[800] text-slate-900">
+                  <div className="min-w-0">
+                    <h2 className="text-[16px] font-[800] text-slate-900 truncate">
                       Applications
                     </h2>
 
-                    <p className="text-[11px] text-slate-500 mt-1">
+                    <p className="text-[10px] text-slate-500 mt-1 truncate">
                       Submitted proposals
                     </p>
                   </div>
@@ -369,7 +376,8 @@ export default function ApplicationPanel() {
                       <div className="flex-1 min-w-0">
                         <h3
                           className="
-                          text-[13px]
+                          text-[12px]
+                          sm:text-[13px]
                           font-[700]
                           tracking-[-0.2px]
                           text-slate-900
@@ -381,7 +389,8 @@ export default function ApplicationPanel() {
 
                         <p
                           className="
-                          text-[11px]
+                          text-[10px]
+                          sm:text-[11px]
                           font-medium
                           text-slate-500
                           mt-1
@@ -393,11 +402,12 @@ export default function ApplicationPanel() {
                       </div>
 
                       <ChevronRight
-                        size={15}
+                        size={14}
                         className="
                         text-slate-400
                         group-hover:text-blue-500
                         transition-all
+                        shrink-0
                         "
                       />
                     </div>
@@ -416,14 +426,16 @@ export default function ApplicationPanel() {
               "
             >
               {selectedApplicant ? (
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   {/* PROFILE SECTION */}
 
                   <div
                     className="
                     flex
-                    items-start
-                    justify-between
+                    flex-col
+                    lg:flex-row
+                    lg:items-start
+                    lg:justify-between
                     gap-5
                     pb-5
                     border-b
@@ -432,35 +444,41 @@ export default function ApplicationPanel() {
                   >
                     {/* PROFILE */}
 
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 min-w-0">
                       <div
                         className="
-                        w-14
-                        h-14
+                        w-12
+                        h-12
+                        sm:w-14
+                        sm:h-14
                         rounded-3xl
                         bg-gradient-to-br
                         from-blue-600
                         to-indigo-600
                         text-white
-                        text-[20px]
+                        text-[18px]
+                        sm:text-[20px]
                         font-black
                         flex
                         items-center
                         justify-center
                         shadow-md
+                        shrink-0
                         "
                       >
                         {selectedApplicant?.tradesperson?.name?.charAt(0)}
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h2
                             className="
-                            text-[20px]
+                            text-[18px]
+                            sm:text-[20px]
                             font-[800]
                             tracking-[-0.4px]
                             text-slate-900
+                            break-words
                             "
                           >
                             {selectedApplicant?.tradesperson?.name}
@@ -469,40 +487,40 @@ export default function ApplicationPanel() {
                           {selectedApplicant?.tradesperson?.isVerified && (
                             <div
                               className="
-                              h-7
-                              px-3
+                              h-6
+                              px-2
                               rounded-full
                               bg-green-50
                               border
                               border-green-100
                               text-green-700
-                              text-[10px]
+                              text-[9px]
                               font-bold
                               flex
                               items-center
                               gap-1
                               "
                             >
-                              <ShieldCheck size={10} />
+                              <ShieldCheck size={9} />
                               VERIFIED
                             </div>
                           )}
                         </div>
 
                         <div className="mt-3 space-y-2">
-                          <div className="flex items-center gap-2 text-[13px] text-slate-600">
-                            <Mail size={13} />
+                          <div className="flex items-center gap-2 text-[12px] text-slate-600 break-all">
+                            <Mail size={12} />
 
                             {selectedApplicant?.tradesperson?.email}
                           </div>
 
                           <div className="flex items-center gap-2">
                             <Star
-                              size={13}
+                              size={12}
                               className="text-yellow-500 fill-yellow-500"
                             />
 
-                            <span className="text-[13px] font-semibold text-slate-700">
+                            <span className="text-[12px] font-semibold text-slate-700">
                               {selectedApplicant?.tradesperson?.averageRating ||
                                 0}
                             </span>
@@ -515,6 +533,8 @@ export default function ApplicationPanel() {
 
                     <div
                       className="
+                      w-full
+                      sm:w-[150px]
                       px-4
                       py-3
                       rounded-3xl
@@ -523,10 +543,9 @@ export default function ApplicationPanel() {
                       to-indigo-50
                       border
                       border-blue-100
-                      min-w-[130px]
                       "
                     >
-                      <div className="text-[20px] font-[800] text-blue-700">
+                      <div className="text-[24px] font-[800] text-blue-700">
                         £{selectedApplicant?.estimatedPrice}
                       </div>
 
@@ -553,7 +572,7 @@ export default function ApplicationPanel() {
                       shadow-sm
                       "
                     >
-                      <p className="text-[14px] font-semibold text-slate-800">
+                      <p className="text-[14px] font-semibold text-slate-800 break-words">
                         {selectedApplicant?.jobTitle}
                       </p>
                     </div>
@@ -578,10 +597,12 @@ export default function ApplicationPanel() {
                     >
                       <p
                         className="
-                        text-[14px]
+                        text-[13px]
+                        sm:text-[14px]
                         leading-7
                         text-slate-700
                         whitespace-pre-line
+                        break-words
                         "
                       >
                         {selectedApplicant?.message}
@@ -594,6 +615,8 @@ export default function ApplicationPanel() {
                   <div
                     className="
                     flex
+                    flex-col
+                    sm:flex-row
                     justify-end
                     gap-3
                     mt-6

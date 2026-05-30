@@ -4,12 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 import {
   Briefcase,
-  Check,
-  X,
   Star,
   Mail,
   Sparkles,
-  Clock3,
   ShieldCheck,
   ChevronRight,
 } from "lucide-react";
@@ -34,6 +31,7 @@ export default function ApplicationPanel() {
   // =========================================
   // FETCH APPLICATIONS
   // =========================================
+
   const fetchApplications = async () => {
     try {
       const res = await api.get("/jobs/my-jobs");
@@ -45,7 +43,6 @@ export default function ApplicationPanel() {
           job.applications.forEach((app) => {
             allApps.push({
               ...app,
-
               jobTitle: job.title,
             });
           });
@@ -65,6 +62,7 @@ export default function ApplicationPanel() {
   // =========================================
   // ACCEPT
   // =========================================
+
   const acceptApplication = async (id) => {
     try {
       setLoading(true);
@@ -88,6 +86,7 @@ export default function ApplicationPanel() {
   // =========================================
   // REJECT
   // =========================================
+
   const rejectApplication = async (id) => {
     try {
       setLoading(true);
@@ -107,16 +106,18 @@ export default function ApplicationPanel() {
   };
 
   // =========================================
-  // INITIAL
+  // INITIAL LOAD
   // =========================================
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchApplications();
   }, []);
 
   // =========================================
-  // REALTIME
+  // REALTIME SOCKET
   // =========================================
+
   useEffect(() => {
     socket.on("receiveNotification", (notification) => {
       if (notification.type === "APPLICATION") {
@@ -134,6 +135,7 @@ export default function ApplicationPanel() {
   // =========================================
   // OUTSIDE CLICK CLOSE
   // =========================================
+
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (panelRef.current && !panelRef.current.contains(e.target)) {
@@ -157,42 +159,42 @@ export default function ApplicationPanel() {
       <button
         onClick={() => setOpen(!open)}
         className="
-      relative
-      w-11
-      h-11
-      rounded-2xl
-      bg-white
-      border
-      border-slate-200
-      hover:bg-slate-50
-      flex
-      items-center
-      justify-center
-      shadow-sm
-      transition-all
-      duration-300
-      "
+        relative
+        w-11
+        h-11
+        rounded-2xl
+        bg-white
+        border
+        border-slate-200
+        hover:bg-slate-50
+        flex
+        items-center
+        justify-center
+        shadow-sm
+        transition-all
+        duration-300
+        "
       >
         <Briefcase size={18} className="text-slate-800" />
 
         {applications.length > 0 && (
           <div
             className="
-          absolute
-          -top-1
-          -right-1
-          min-w-[18px]
-          h-[18px]
-          px-1
-          rounded-full
-          bg-blue-600
-          text-white
-          text-[10px]
-          font-bold
-          flex
-          items-center
-          justify-center
-          "
+            absolute
+            -top-1
+            -right-1
+            min-w-[18px]
+            h-[18px]
+            px-1
+            rounded-full
+            bg-blue-600
+            text-white
+            text-[10px]
+            font-bold
+            flex
+            items-center
+            justify-center
+            "
           >
             {applications.length}
           </div>
@@ -205,12 +207,12 @@ export default function ApplicationPanel() {
         <div
           onClick={() => setOpen(false)}
           className="
-        fixed
-        inset-0
-        bg-black/20
-        backdrop-blur-[4px]
-        z-[70]
-        "
+          fixed
+          inset-0
+          bg-black/20
+          backdrop-blur-[4px]
+          z-[70]
+          "
         />
       )}
 
@@ -219,186 +221,168 @@ export default function ApplicationPanel() {
       {open && (
         <div
           className="
-        fixed
-        top-[90px]
-        right-6
-        z-[80]
-        "
+          fixed
+          top-0
+          left-0
+          h-screen
+          z-[80]
+          "
         >
           <div
             ref={panelRef}
             className="
-          w-[920px]
-          h-[620px]
-          rounded-[28px]
-          border
-          border-slate-200
-          bg-white
-          shadow-[0_12px_40px_rgba(15,23,42,0.12)]
-          overflow-hidden
-          flex
-          "
+            w-[980px]
+            h-screen
+            bg-white
+            shadow-[0_12px_40px_rgba(15,23,42,0.15)]
+            overflow-hidden
+            flex
+            border-r
+            border-slate-200
+            "
           >
-            {/* LEFT SIDE */}
+            {/* LEFT SIDEBAR */}
 
             <div
               className="
-            w-[280px]
-            border-r
-            border-slate-200
-            bg-slate-50
-            flex
-            flex-col
-            "
+              w-[320px]
+              border-r
+              border-slate-200
+              bg-slate-50
+              flex
+              flex-col
+              "
             >
               {/* HEADER */}
 
               <div
                 className="
-              p-5
-              border-b
-              border-slate-200
-              "
+                p-5
+                border-b
+                border-slate-200
+                bg-white
+                "
               >
                 <div className="flex items-center gap-3">
                   <div
                     className="
-                  w-10
-                  h-10
-                  rounded-2xl
-                  bg-gradient-to-br
-                  from-blue-600
-                  to-indigo-600
-                  text-white
-                  flex
-                  items-center
-                  justify-center
-                  "
+                    w-11
+                    h-11
+                    rounded-2xl
+                    bg-gradient-to-br
+                    from-blue-600
+                    to-indigo-600
+                    text-white
+                    flex
+                    items-center
+                    justify-center
+                    shadow-md
+                    "
                   >
-                    <Sparkles size={16} />
+                    <Sparkles size={18} />
                   </div>
 
                   <div>
-                    <h2
-                      className="
-                    text-[17px]
-                    font-[800]
-                    text-slate-900
-                    "
-                    >
+                    <h2 className="text-[18px] font-[800] text-slate-900">
                       Applications
                     </h2>
 
-                    <p
-                      className="
-                    text-[12px]
-                    text-slate-500
-                    mt-0.5
-                    "
-                    >
-                      Incoming proposals
+                    <p className="text-[12px] text-slate-500 mt-1">
+                      Submitted proposals
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* LIST */}
+              {/* APPLICANT LIST */}
 
               <div
                 className="
-              flex-1
-              overflow-y-auto
-              p-3
-              space-y-2
-              "
+                flex-1
+                overflow-y-auto
+                p-3
+                space-y-3
+                "
               >
                 {applications.map((app) => (
                   <button
                     key={app._id}
                     onClick={() => setSelectedApplicant(app)}
                     className={`
-                  w-full
-                  text-left
-                  rounded-2xl
-                  p-3
-                  border
-                  transition-all
-                  duration-300
+                    w-full
+                    text-left
+                    rounded-2xl
+                    p-4
+                    border
+                    transition-all
+                    duration-300
 
-                  ${
-                    selectedApplicant?._id === app._id
-                      ? `
-                        bg-blue-50
-                        border-blue-200
-                      `
-                      : `
-                        bg-white
-                        border-slate-200
-                        hover:border-blue-200
-                      `
-                  }
-                `}
+                    ${
+                      selectedApplicant?._id === app._id
+                        ? `
+                          bg-blue-50
+                          border-blue-200
+                          shadow-sm
+                        `
+                        : `
+                          bg-white
+                          border-slate-200
+                          hover:border-blue-200
+                          hover:shadow-sm
+                        `
+                    }
+                  `}
                   >
-                    <div className="flex gap-3">
+                    <div className="flex items-center gap-3">
                       {/* AVATAR */}
 
                       <div
                         className="
-                      w-10
-                      h-10
-                      rounded-2xl
-                      bg-gradient-to-br
-                      from-blue-600
-                      to-indigo-600
-                      text-white
-                      text-[15px]
-                      font-black
-                      flex
-                      items-center
-                      justify-center
-                      shrink-0
-                      "
+                        w-12
+                        h-12
+                        rounded-2xl
+                        bg-gradient-to-br
+                        from-blue-600
+                        to-indigo-600
+                        text-white
+                        text-[16px]
+                        font-black
+                        flex
+                        items-center
+                        justify-center
+                        shrink-0
+                        "
                       >
                         {app.tradesperson?.name?.charAt(0)}
                       </div>
 
-                      {/* CONTENT */}
+                      {/* INFO */}
 
                       <div className="flex-1 min-w-0">
                         <h3
                           className="
-                        text-[13px]
-                        font-[800]
-                        text-slate-900
-                        truncate
-                        "
+                          text-[14px]
+                          font-[800]
+                          text-slate-900
+                          truncate
+                          "
                         >
                           {app.tradesperson?.name}
                         </h3>
 
                         <p
                           className="
-                        text-[11px]
-                        text-slate-500
-                        mt-1
-                        truncate
-                        "
+                          text-[12px]
+                          text-slate-500
+                          mt-1
+                          truncate
+                          "
                         >
                           {app.jobTitle}
                         </p>
-
-                        <p
-                          className="
-                        text-[11px]
-                        text-slate-500
-                        leading-5
-                        mt-2
-                        line-clamp-2
-                        "
-                        >
-                          {app.message}
-                        </p>
                       </div>
+
+                      <ChevronRight size={16} className="text-slate-400" />
                     </div>
                   </button>
                 ))}
@@ -409,76 +393,70 @@ export default function ApplicationPanel() {
 
             <div
               className="
-            flex-1
-            overflow-y-auto
-            bg-white
-            "
+              flex-1
+              overflow-y-auto
+              bg-white
+              "
             >
-              {selectedApplicant && (
-                <div className="p-5">
-                  {/* PROFILE */}
+              {selectedApplicant ? (
+                <div className="p-8">
+                  {/* TOP SECTION */}
 
                   <div
                     className="
-                  flex
-                  items-start
-                  justify-between
-                  gap-4
-                  pb-5
-                  border-b
-                  border-slate-200
-                  "
+                    flex
+                    items-start
+                    justify-between
+                    gap-5
+                    pb-6
+                    border-b
+                    border-slate-200
+                    "
                   >
-                    {/* LEFT */}
+                    {/* PROFILE */}
 
                     <div className="flex gap-4">
                       <div
                         className="
-                      w-14
-                      h-14
-                      rounded-3xl
-                      bg-gradient-to-br
-                      from-blue-600
-                      to-indigo-600
-                      text-white
-                      text-[20px]
-                      font-black
-                      flex
-                      items-center
-                      justify-center
-                      "
+                        w-16
+                        h-16
+                        rounded-3xl
+                        bg-gradient-to-br
+                        from-blue-600
+                        to-indigo-600
+                        text-white
+                        text-[22px]
+                        font-black
+                        flex
+                        items-center
+                        justify-center
+                        "
                       >
                         {selectedApplicant?.tradesperson?.name?.charAt(0)}
                       </div>
 
                       <div>
                         <div className="flex items-center gap-2">
-                          <h2
-                            className="
-                          text-[18px]
-                          font-[800]
-                          text-slate-900
-                          "
-                          >
+                          <h2 className="text-[22px] font-[800] text-slate-900">
                             {selectedApplicant?.tradesperson?.name}
                           </h2>
 
                           {selectedApplicant?.tradesperson?.isVerified && (
                             <div
                               className="
-                            h-7
-                            px-3
-                            rounded-full
-                            bg-green-50
-                            border
-                            border-green-100
-                            text-green-700
-                            text-[10px]
-                            font-bold
-                            flex
-                            items-center
-                            gap-1
-                            "
+                              h-7
+                              px-3
+                              rounded-full
+                              bg-green-50
+                              border
+                              border-green-100
+                              text-green-700
+                              text-[10px]
+                              font-bold
+                              flex
+                              items-center
+                              gap-1
+                              "
                             >
                               <ShieldCheck size={10} />
                               VERIFIED
@@ -486,45 +464,20 @@ export default function ApplicationPanel() {
                           )}
                         </div>
 
-                        <div
-                          className="
-                        flex
-                        items-center
-                        gap-4
-                        mt-3
-                        flex-wrap
-                        "
-                        >
-                          <div
-                            className="
-                          flex
-                          items-center
-                          gap-2
-                          text-[12px]
-                          text-slate-500
-                          "
-                          >
-                            <Mail size={12} />
+                        <div className="mt-3 space-y-2">
+                          <div className="flex items-center gap-2 text-[13px] text-slate-600">
+                            <Mail size={13} />
 
                             {selectedApplicant?.tradesperson?.email}
                           </div>
 
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-2">
                             <Star
-                              size={11}
-                              className="
-                            text-yellow-500
-                            fill-yellow-500
-                            "
+                              size={13}
+                              className="text-yellow-500 fill-yellow-500"
                             />
 
-                            <span
-                              className="
-                            text-[12px]
-                            font-semibold
-                            text-slate-700
-                            "
-                            >
+                            <span className="text-[13px] font-semibold text-slate-700">
                               {selectedApplicant?.tradesperson?.averageRating ||
                                 0}
                             </span>
@@ -537,100 +490,105 @@ export default function ApplicationPanel() {
 
                     <div
                       className="
-                    px-4
-                    py-3
-                    rounded-2xl
-                    bg-blue-50
-                    border
-                    border-blue-100
-                    "
-                    >
-                      <div
-                        className="
-                      text-[20px]
-                      font-[800]
-                      text-blue-700
+                      px-5
+                      py-4
+                      rounded-3xl
+                      bg-blue-50
+                      border
+                      border-blue-100
                       "
-                      >
+                    >
+                      <div className="text-[24px] font-[800] text-blue-700">
                         £{selectedApplicant?.estimatedPrice}
                       </div>
 
-                      <p
-                        className="
-                      text-[11px]
-                      text-slate-500
-                      mt-1
-                      "
-                      >
+                      <p className="text-[12px] text-slate-500 mt-1">
                         Estimated Budget
                       </p>
                     </div>
                   </div>
 
-                  {/* PROPOSAL */}
+                  {/* JOB TITLE */}
 
-                  <div className="mt-5">
+                  <div className="mt-6">
+                    <h3 className="text-[14px] font-[700] text-slate-500 mb-2">
+                      Job Title
+                    </h3>
+
                     <div
                       className="
-                    rounded-2xl
-                    bg-slate-50
-                    border
-                    border-slate-200
-                    p-4
-                    "
-                    >
-                      <h3
-                        className="
-                      text-[14px]
-                      font-[700]
-                      text-slate-900
-                      mb-3
+                      rounded-2xl
+                      border
+                      border-slate-200
+                      bg-slate-50
+                      p-4
+                      text-[15px]
+                      font-semibold
+                      text-slate-800
                       "
-                      >
-                        Proposal Message
-                      </h3>
+                    >
+                      {selectedApplicant?.jobTitle}
+                    </div>
+                  </div>
 
+                  {/* PROPOSAL */}
+
+                  <div className="mt-6">
+                    <h3 className="text-[14px] font-[700] text-slate-500 mb-2">
+                      Proposal Message
+                    </h3>
+
+                    <div
+                      className="
+                      rounded-2xl
+                      bg-slate-50
+                      border
+                      border-slate-200
+                      p-5
+                      "
+                    >
                       <p
                         className="
-                      text-[14px]
-                      leading-7
-                      text-slate-600
-                      "
+                        text-[15px]
+                        leading-8
+                        text-slate-700
+                        whitespace-pre-line
+                        "
                       >
                         {selectedApplicant?.message}
                       </p>
                     </div>
                   </div>
 
-                  {/* ACTIONS */}
+                  {/* ACTION BUTTONS */}
 
                   <div
                     className="
-                  flex
-                  justify-end
-                  gap-3
-                  mt-6
-                  pt-5
-                  border-t
-                  border-slate-200
-                  "
+                    flex
+                    justify-end
+                    gap-3
+                    mt-8
+                    pt-6
+                    border-t
+                    border-slate-200
+                    "
                   >
                     <button
                       onClick={() => rejectApplication(selectedApplicant._id)}
                       disabled={loading}
                       className="
-                    h-10
-                    px-4
-                    rounded-xl
-                    bg-red-50
-                    hover:bg-red-100
-                    border
-                    border-red-100
-                    text-red-600
-                    text-[13px]
-                    font-semibold
-                    transition-all
-                    "
+                      h-11
+                      px-5
+                      rounded-2xl
+                      bg-red-50
+                      hover:bg-red-100
+                      border
+                      border-red-100
+                      text-red-600
+                      text-[14px]
+                      font-semibold
+                      transition-all
+                      "
                     >
                       Reject
                     </button>
@@ -639,19 +597,33 @@ export default function ApplicationPanel() {
                       onClick={() => acceptApplication(selectedApplicant._id)}
                       disabled={loading}
                       className="
-                    h-10
-                    px-4
-                    rounded-xl
-                    bg-emerald-500
-                    hover:bg-emerald-600
-                    text-white
-                    text-[13px]
-                    font-semibold
-                    transition-all
-                    "
+                      h-11
+                      px-5
+                      rounded-2xl
+                      bg-emerald-500
+                      hover:bg-emerald-600
+                      text-white
+                      text-[14px]
+                      font-semibold
+                      transition-all
+                      "
                     >
                       Accept
                     </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <Briefcase size={40} className="mx-auto text-slate-300" />
+
+                    <h3 className="mt-4 text-[18px] font-[700] text-slate-700">
+                      No Application Selected
+                    </h3>
+
+                    <p className="mt-2 text-[13px] text-slate-500">
+                      Select an applicant to view full proposal details
+                    </p>
                   </div>
                 </div>
               )}

@@ -110,6 +110,7 @@ export default function ApplicationPanel() {
   // =========================================
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchApplications();
   }, []);
 
@@ -200,7 +201,7 @@ export default function ApplicationPanel() {
         )}
       </button>
 
-      {/* BACKDROP */}
+      {/* BLUR BACKDROP */}
 
       {open && (
         <div
@@ -208,8 +209,8 @@ export default function ApplicationPanel() {
           className="
           fixed
           inset-0
-          bg-black/20
-          backdrop-blur-[4px]
+          bg-black/30
+          backdrop-blur-md
           z-[70]
           "
         />
@@ -221,33 +222,28 @@ export default function ApplicationPanel() {
         <div
           className="
           fixed
-          top-0
-          left-[12px]
-          sm:left-[20px]
-          md:left-[28px]
-          h-screen
+          top-[88px]
+          left-[14px]
+          sm:left-[24px]
+          md:left-[32px]
+          right-[14px]
           z-[80]
-          flex
-          items-start
           "
         >
           <div
             ref={panelRef}
             className="
-            w-[95vw]
-            max-w-[820px]
-            h-[85vh]
-            sm:h-[88vh]
-            mt-6
-            rounded-r-[32px]
+            w-full
+            max-w-[1020px]
+            h-[82vh]
+            rounded-[34px]
             bg-white/95
             backdrop-blur-xl
-            shadow-[0_12px_40px_rgba(15,23,42,0.15)]
+            shadow-[0_25px_70px_rgba(15,23,42,0.18)]
             overflow-hidden
             flex
-            border-r
             border
-            border-slate-200
+            border-white/60
             "
           >
             {/* LEFT SIDEBAR */}
@@ -255,7 +251,7 @@ export default function ApplicationPanel() {
             <div
               className="
               w-[220px]
-              sm:w-[240px]
+              sm:w-[250px]
               border-r
               border-slate-100
               bg-slate-50/70
@@ -268,18 +264,18 @@ export default function ApplicationPanel() {
               <div
                 className="
                 px-4
-                py-4
+                py-5
                 border-b
                 border-slate-100
-                bg-white/80
+                bg-white/70
                 backdrop-blur-xl
                 "
               >
                 <div className="flex items-center gap-3">
                   <div
                     className="
-                    w-10
-                    h-10
+                    w-11
+                    h-11
                     rounded-2xl
                     bg-gradient-to-br
                     from-blue-600
@@ -288,7 +284,7 @@ export default function ApplicationPanel() {
                     flex
                     items-center
                     justify-center
-                    shadow-md
+                    shadow-lg
                     shrink-0
                     "
                   >
@@ -296,11 +292,11 @@ export default function ApplicationPanel() {
                   </div>
 
                   <div className="min-w-0">
-                    <h2 className="text-[16px] font-[800] text-slate-900 truncate">
+                    <h2 className="text-[17px] font-[800] text-slate-900">
                       Applications
                     </h2>
 
-                    <p className="text-[10px] text-slate-500 mt-1 truncate">
+                    <p className="text-[11px] text-slate-500 mt-1">
                       Submitted proposals
                     </p>
                   </div>
@@ -324,7 +320,7 @@ export default function ApplicationPanel() {
                     className={`
                     w-full
                     text-left
-                    rounded-2xl
+                    rounded-3xl
                     px-3
                     py-3
                     border
@@ -337,13 +333,13 @@ export default function ApplicationPanel() {
                         ? `
                           bg-white
                           border-blue-200
-                          shadow-[0_4px_20px_rgba(59,130,246,0.12)]
+                          shadow-[0_6px_22px_rgba(59,130,246,0.14)]
                         `
                         : `
-                          bg-white/70
+                          bg-white/80
                           border-slate-100
                           hover:border-blue-100
-                          hover:shadow-[0_4px_18px_rgba(15,23,42,0.06)]
+                          hover:shadow-[0_4px_18px_rgba(15,23,42,0.07)]
                         `
                     }
                   `}
@@ -353,14 +349,14 @@ export default function ApplicationPanel() {
 
                       <div
                         className="
-                        w-10
-                        h-10
+                        w-11
+                        h-11
                         rounded-2xl
                         bg-gradient-to-br
                         from-blue-600
                         to-indigo-600
                         text-white
-                        text-[14px]
+                        text-[15px]
                         font-black
                         flex
                         items-center
@@ -376,10 +372,8 @@ export default function ApplicationPanel() {
                       <div className="flex-1 min-w-0">
                         <h3
                           className="
-                          text-[12px]
-                          sm:text-[13px]
+                          text-[13px]
                           font-[700]
-                          tracking-[-0.2px]
                           text-slate-900
                           truncate
                           "
@@ -389,9 +383,7 @@ export default function ApplicationPanel() {
 
                         <p
                           className="
-                          text-[10px]
-                          sm:text-[11px]
-                          font-medium
+                          text-[11px]
                           text-slate-500
                           mt-1
                           truncate
@@ -402,7 +394,7 @@ export default function ApplicationPanel() {
                       </div>
 
                       <ChevronRight
-                        size={14}
+                        size={15}
                         className="
                         text-slate-400
                         group-hover:text-blue-500
@@ -422,12 +414,13 @@ export default function ApplicationPanel() {
               className="
               flex-1
               overflow-y-auto
-              bg-white
+              bg-white/60
+              backdrop-blur-xl
               "
             >
               {selectedApplicant ? (
-                <div className="p-4 sm:p-6">
-                  {/* PROFILE SECTION */}
+                <div className="p-5 sm:p-7">
+                  {/* PROFILE */}
 
                   <div
                     className="
@@ -442,27 +435,24 @@ export default function ApplicationPanel() {
                     border-slate-100
                     "
                   >
-                    {/* PROFILE */}
+                    {/* LEFT */}
 
                     <div className="flex gap-4 min-w-0">
                       <div
                         className="
-                        w-12
-                        h-12
-                        sm:w-14
-                        sm:h-14
+                        w-14
+                        h-14
                         rounded-3xl
                         bg-gradient-to-br
                         from-blue-600
                         to-indigo-600
                         text-white
-                        text-[18px]
-                        sm:text-[20px]
+                        text-[20px]
                         font-black
                         flex
                         items-center
                         justify-center
-                        shadow-md
+                        shadow-lg
                         shrink-0
                         "
                       >
@@ -473,12 +463,11 @@ export default function ApplicationPanel() {
                         <div className="flex items-center gap-2 flex-wrap">
                           <h2
                             className="
-                            text-[18px]
-                            sm:text-[20px]
+                            text-[20px]
+                            sm:text-[22px]
                             font-[800]
-                            tracking-[-0.4px]
+                            tracking-[-0.5px]
                             text-slate-900
-                            break-words
                             "
                           >
                             {selectedApplicant?.tradesperson?.name}
@@ -487,40 +476,40 @@ export default function ApplicationPanel() {
                           {selectedApplicant?.tradesperson?.isVerified && (
                             <div
                               className="
-                              h-6
-                              px-2
+                              h-7
+                              px-3
                               rounded-full
                               bg-green-50
                               border
                               border-green-100
                               text-green-700
-                              text-[9px]
+                              text-[10px]
                               font-bold
                               flex
                               items-center
                               gap-1
                               "
                             >
-                              <ShieldCheck size={9} />
+                              <ShieldCheck size={10} />
                               VERIFIED
                             </div>
                           )}
                         </div>
 
                         <div className="mt-3 space-y-2">
-                          <div className="flex items-center gap-2 text-[12px] text-slate-600 break-all">
-                            <Mail size={12} />
+                          <div className="flex items-center gap-2 text-[13px] text-slate-600 break-all">
+                            <Mail size={13} />
 
                             {selectedApplicant?.tradesperson?.email}
                           </div>
 
                           <div className="flex items-center gap-2">
                             <Star
-                              size={12}
+                              size={13}
                               className="text-yellow-500 fill-yellow-500"
                             />
 
-                            <span className="text-[12px] font-semibold text-slate-700">
+                            <span className="text-[13px] font-semibold text-slate-700">
                               {selectedApplicant?.tradesperson?.averageRating ||
                                 0}
                             </span>
@@ -529,27 +518,28 @@ export default function ApplicationPanel() {
                       </div>
                     </div>
 
-                    {/* PRICE CARD */}
+                    {/* PRICE */}
 
                     <div
                       className="
                       w-full
-                      sm:w-[150px]
-                      px-4
-                      py-3
-                      rounded-3xl
+                      sm:w-[190px]
+                      rounded-[30px]
                       bg-gradient-to-br
                       from-blue-50
                       to-indigo-50
                       border
                       border-blue-100
+                      px-5
+                      py-5
+                      shadow-sm
                       "
                     >
-                      <div className="text-[24px] font-[800] text-blue-700">
+                      <div className="text-[34px] font-[900] text-blue-700">
                         £{selectedApplicant?.estimatedPrice}
                       </div>
 
-                      <p className="text-[11px] text-slate-500 mt-1">
+                      <p className="text-[13px] text-slate-500 mt-2">
                         Estimated Budget
                       </p>
                     </div>
@@ -557,52 +547,52 @@ export default function ApplicationPanel() {
 
                   {/* JOB TITLE */}
 
-                  <div className="mt-5">
-                    <h3 className="text-[13px] font-[700] text-slate-500 mb-2">
+                  <div className="mt-6">
+                    <h3 className="text-[14px] font-[700] text-slate-700 mb-3">
                       Job Title
                     </h3>
 
                     <div
                       className="
-                      rounded-2xl
+                      rounded-3xl
                       border
                       border-slate-100
-                      bg-slate-50/70
-                      p-4
+                      bg-white/70
+                      backdrop-blur-xl
+                      p-5
                       shadow-sm
                       "
                     >
-                      <p className="text-[14px] font-semibold text-slate-800 break-words">
+                      <p className="text-[15px] font-semibold text-slate-800">
                         {selectedApplicant?.jobTitle}
                       </p>
                     </div>
                   </div>
 
-                  {/* PROPOSAL MESSAGE */}
+                  {/* PROPOSAL */}
 
-                  <div className="mt-5">
-                    <h3 className="text-[13px] font-[700] text-slate-500 mb-2">
+                  <div className="mt-6">
+                    <h3 className="text-[14px] font-[700] text-slate-700 mb-3">
                       Proposal Message
                     </h3>
 
                     <div
                       className="
-                      rounded-2xl
+                      rounded-3xl
                       border
                       border-slate-100
-                      bg-slate-50/70
-                      p-4
+                      bg-white/70
+                      backdrop-blur-xl
+                      p-5
                       shadow-sm
                       "
                     >
                       <p
                         className="
-                        text-[13px]
-                        sm:text-[14px]
-                        leading-7
+                        text-[14px]
+                        leading-8
                         text-slate-700
                         whitespace-pre-line
-                        break-words
                         "
                       >
                         {selectedApplicant?.message}
@@ -615,11 +605,9 @@ export default function ApplicationPanel() {
                   <div
                     className="
                     flex
-                    flex-col
-                    sm:flex-row
                     justify-end
                     gap-3
-                    mt-6
+                    mt-7
                     pt-5
                     border-t
                     border-slate-100
@@ -629,15 +617,15 @@ export default function ApplicationPanel() {
                       onClick={() => rejectApplication(selectedApplicant._id)}
                       disabled={loading}
                       className="
-                      h-10
-                      px-5
+                      h-11
+                      px-6
                       rounded-2xl
                       bg-red-50
                       hover:bg-red-100
                       border
                       border-red-100
                       text-red-600
-                      text-[13px]
+                      text-[14px]
                       font-semibold
                       transition-all
                       duration-300
@@ -650,17 +638,17 @@ export default function ApplicationPanel() {
                       onClick={() => acceptApplication(selectedApplicant._id)}
                       disabled={loading}
                       className="
-                      h-10
-                      px-5
+                      h-11
+                      px-6
                       rounded-2xl
                       bg-gradient-to-r
                       from-emerald-500
                       to-green-500
                       hover:scale-[1.02]
                       text-white
-                      text-[13px]
+                      text-[14px]
                       font-semibold
-                      shadow-lg
+                      shadow-xl
                       shadow-emerald-500/20
                       transition-all
                       duration-300
@@ -673,9 +661,9 @@ export default function ApplicationPanel() {
               ) : (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
-                    <Briefcase size={36} className="mx-auto text-slate-300" />
+                    <Briefcase size={38} className="mx-auto text-slate-300" />
 
-                    <h3 className="mt-4 text-[17px] font-[700] text-slate-700">
+                    <h3 className="mt-4 text-[18px] font-[700] text-slate-700">
                       No Application Selected
                     </h3>
 

@@ -110,7 +110,6 @@ export default function ApplicationPanel() {
   // =========================================
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchApplications();
   }, []);
 
@@ -214,7 +213,7 @@ export default function ApplicationPanel() {
           fixed
           inset-0
           z-[70]
-          bg-white/8
+          bg-white/10
           backdrop-blur-[10px]
           "
         />
@@ -245,6 +244,7 @@ export default function ApplicationPanel() {
             backdrop-blur-2xl
             shadow-[0_30px_80px_rgba(15,23,42,0.18)]
             overflow-hidden
+            overflow-x-hidden
             flex
             border
             border-white/50
@@ -261,6 +261,7 @@ export default function ApplicationPanel() {
               backdrop-blur-xl
               flex
               flex-col
+              shrink-0
               "
             >
               {/* HEADER */}
@@ -310,6 +311,7 @@ export default function ApplicationPanel() {
                 className="
                 flex-1
                 overflow-y-auto
+                overflow-x-hidden
                 p-3
                 space-y-3
                 "
@@ -345,7 +347,7 @@ export default function ApplicationPanel() {
                     }
                   `}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
                       {/* AVATAR */}
 
                       <div
@@ -370,7 +372,7 @@ export default function ApplicationPanel() {
 
                       {/* INFO */}
 
-                      <div className="flex-1 min-w-0">
+                      <div className="flex-1 min-w-0 overflow-hidden">
                         <h3
                           className="
                           text-[13px]
@@ -400,6 +402,7 @@ export default function ApplicationPanel() {
                         text-slate-400
                         group-hover:text-blue-500
                         transition-all
+                        shrink-0
                         "
                       />
                     </div>
@@ -414,12 +417,13 @@ export default function ApplicationPanel() {
               className="
               flex-1
               overflow-y-auto
+              overflow-x-hidden
               bg-white/45
               backdrop-blur-xl
               "
             >
               {selectedApplicant && (
-                <div className="p-6 sm:p-7">
+                <div className="p-6 sm:p-7 max-w-full overflow-hidden">
                   {/* TOP */}
 
                   <div
@@ -435,7 +439,7 @@ export default function ApplicationPanel() {
                   >
                     {/* PROFILE */}
 
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 min-w-0 overflow-hidden">
                       <div
                         className="
                         w-14
@@ -451,12 +455,13 @@ export default function ApplicationPanel() {
                         items-center
                         justify-center
                         shadow-lg
+                        shrink-0
                         "
                       >
                         {selectedApplicant?.tradesperson?.name?.charAt(0)}
                       </div>
 
-                      <div>
+                      <div className="min-w-0 overflow-hidden">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h2
                             className="
@@ -464,6 +469,7 @@ export default function ApplicationPanel() {
                             font-[800]
                             tracking-[-0.5px]
                             text-slate-900
+                            truncate
                             "
                           >
                             {selectedApplicant?.tradesperson?.name}
@@ -484,6 +490,7 @@ export default function ApplicationPanel() {
                               flex
                               items-center
                               gap-1
+                              shrink-0
                               "
                             >
                               <ShieldCheck size={10} />
@@ -492,17 +499,28 @@ export default function ApplicationPanel() {
                           )}
                         </div>
 
-                        <div className="mt-3 space-y-2">
-                          <div className="flex items-center gap-2 text-[13px] text-slate-600">
-                            <Mail size={13} />
+                        <div className="mt-3 space-y-2 overflow-hidden">
+                          <div
+                            className="
+                            flex
+                            items-center
+                            gap-2
+                            text-[13px]
+                            text-slate-600
+                            break-all
+                            "
+                          >
+                            <Mail size={13} className="shrink-0" />
 
-                            {selectedApplicant?.tradesperson?.email}
+                            <span className="break-all">
+                              {selectedApplicant?.tradesperson?.email}
+                            </span>
                           </div>
 
                           <div className="flex items-center gap-2">
                             <Star
                               size={13}
-                              className="text-yellow-500 fill-yellow-500"
+                              className="text-yellow-500 fill-yellow-500 shrink-0"
                             />
 
                             <span className="text-[13px] font-semibold text-slate-700">
@@ -528,6 +546,7 @@ export default function ApplicationPanel() {
                       border-blue-100
                       shadow-sm
                       min-w-[150px]
+                      shrink-0
                       "
                     >
                       <div className="text-[28px] font-[900] text-blue-700">
@@ -555,9 +574,18 @@ export default function ApplicationPanel() {
                       bg-white/80
                       p-4
                       shadow-sm
+                      overflow-hidden
+                      max-w-full
                       "
                     >
-                      <p className="text-[15px] font-semibold text-slate-800">
+                      <p
+                        className="
+                        text-[15px]
+                        font-semibold
+                        text-slate-800
+                        break-words
+                        "
+                      >
                         {selectedApplicant?.jobTitle}
                       </p>
                     </div>
@@ -578,6 +606,8 @@ export default function ApplicationPanel() {
                       bg-white/80
                       p-5
                       shadow-sm
+                      overflow-hidden
+                      max-w-full
                       "
                     >
                       <p
@@ -586,6 +616,9 @@ export default function ApplicationPanel() {
                         leading-8
                         text-slate-700
                         whitespace-pre-line
+                        break-words
+                        overflow-hidden
+                        w-full
                         "
                       >
                         {selectedApplicant?.message}

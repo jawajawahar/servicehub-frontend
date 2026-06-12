@@ -1,6 +1,6 @@
 "use client";
 
-import socket from "../lib/socket";
+import socket from "../services/socket";
 
 import Link from "next/link";
 
